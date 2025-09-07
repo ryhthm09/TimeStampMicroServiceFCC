@@ -23,14 +23,16 @@ app.get("/", function (req, res) {
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
+app.get("/api", function (req, res) {
+  const currentDate = new Date();
+  res.json({
+    unix: currentDate.getTime(),
+    utc: currentDate.toUTCString()
+  });
+});
+
 app.get("/api/:date", function (req, res) {
-  if (!req.params.date) {
-    const currentDate = new Date();
-    return res.json({
-      unix: currentDate.getTime(),
-      utc: currentDate.toUTCString()
-    });
-  }
+  
   const dateString = req.params.date;
   let date;
 
